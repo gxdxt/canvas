@@ -1,4 +1,4 @@
-import {Polygon} from "./polygon.js";
+import {Polygon, Polygon2} from "./polygon.js";
 
 
 class App{
@@ -38,7 +38,7 @@ class App{
             this.stageWidth/2,
             this.stageHeight/2,
             this.stageHeight/3,
-            3
+            5
         )
     }
 
