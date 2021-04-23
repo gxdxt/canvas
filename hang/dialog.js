@@ -1,5 +1,4 @@
 import {Point} from './point.js';
-import {Dialog} from './dialog.js';
 
 const FOLLOW_SPEED = 0.08;
 const ROTATE_SPEED = 0.12;
@@ -14,8 +13,8 @@ export class Dialog{
         this.pos = new Point();
         this.target = new Point();
         this.prevPos = new Point();
-        this.dwonPos = new Point();
-        this.sppedPos = new Point();
+        this.downPos = new Point();
+        this.speedPos = new Point();
         this.startPos = new Point();
         this.mousePos = new Point();
         this.centerPos = new Point();
@@ -33,8 +32,10 @@ export class Dialog{
     }
 
     animate(ctx){
+        const move = this.target.clone().substract(this.pos).reduce(FOLLOW_SPEED);
+        this.pos.add(move);
         ctx.beginPath();
-        ctx.fillStyle = '#fefefe';
+        ctx.fillStyle = '#f4e55a';
         ctx.fillRect(this.pos.x, this.pos.y, WIDTH, HEIGHT);
     }
 

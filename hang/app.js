@@ -1,5 +1,7 @@
-import { Dialog } from './dialog.js';
 import {Point} from './point.js';
+import {Dialog} from './dialog.js';
+
+
 class App{
     constructor(){
         this.canvas = document.createElement('canvas');
@@ -7,6 +9,15 @@ class App{
         this.ctx = this.canvas.getContext('2d');
 
         this.pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
+
+        this.mousePos = new Point();
+        this.curItem = null;
+
+        this.items = [];
+        this.total = 1;
+        for (let i = 0; i < this.total; i++){
+            this.items[i] = new Dialog();
+        } // 이게 순서가 중요했구나 많이 ㅠㅠㅠ
 
         window.addEventListener('resize', this.resize.bind(this), false);
         this.resize();
@@ -19,14 +30,10 @@ class App{
         document.addEventListener('pointermove', this.onMove.bind(this), false);
         document.addEventListener('pointerup', this.onUp.bind(this), false);
 
-        this.mousePos = new Point();
-        this.curItem = null;
+        
+       
 
-        this.items = [];
-        this.total = 1;
-        for (let i = 0; i < this.total; i++){
-            this.items[i] = new Dialog();
-        }
+        
     }
 
     resize(){
@@ -65,7 +72,7 @@ class App{
         this.mousePos.y = e.clientY;
 
         for (let i = this.items.length - 1; i >= 0; i--){
-            const item = this.items[i].down(this.mousePost.clone());
+            const item = this.items[i].down(this.mousePos.clone());
             if (item){
                 this.curItem = item;
                 const index = this.items.indexOf(item);
@@ -77,10 +84,17 @@ class App{
     onMove(e) {
         this.mousePos.x = e.clientX;
         this.mousePos.y = e.clientY;
+
+        for(let i = 0; i < this.items.length; i++){
+            this.items[i].move(this.mousePos.clone());
+        }
     }
     onUp(e) {
-        this.mousePos.x = e.clientX;
-        this.mousePos.y = e.clientY;
+        this.curItem = null;
+        
+        for(let i = 0; i < this.items.length; i++){
+            this.items[i].up();
+        }
     }
 
     

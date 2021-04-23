@@ -23,7 +23,7 @@ export class Point {
     }
 
     collide(point, width, height){
-        if(this.x >- point.x &&
+        if(this.x >= point.x &&
             this.x <= point.x + width &&
             this.y >= point.y &&
             this.y <= point.y + height){
@@ -34,6 +34,6 @@ export class Point {
     }
 
     clone(){
-        return new Point(this.x, this.y);
+        return new Point(this.x, this.y); 
     }
 }
