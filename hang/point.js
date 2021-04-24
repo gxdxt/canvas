@@ -10,7 +10,7 @@ export class Point {
         return this;
     }
 
-    substract(point){
+    subtract(point){
         this.x -= point.x;
         this.y -= point.y;
         return this;

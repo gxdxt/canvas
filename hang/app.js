@@ -65,6 +65,25 @@ class App{
         for (let i = 0; i < this.items.length; i++){
             this.items[i].animate(this.ctx);
         }
+
+        if (this.curItem) {
+            this.ctx.fillStyle = '#ff4338';
+            this.ctx.strokeStyle = '#ff4338';
+
+            this.ctx.beginPath();
+            this.ctx.arc(this.curItem.centerPos.x, this.curItem.centerPos.y, 8, 0, Math.PI * 2);
+            this.ctx.fill();
+
+            this.ctx.beginPath();
+            this.ctx.arc(this.mousePos.x, this.mousePos.y, 8, 0, Math.PI * 2);
+            this.ctx.fill();
+
+            //두 점을 연결하는 선 만들기
+            this.ctx.beginPath();
+            this.ctx.moveTo(this.mousePos.x, this.mousePos.y);
+            this.ctx.lineTo(this.curItem.centerPos.x, this.curItem.centerPos.y);
+            this.ctx.stroke();
+        }
     }
 
     onDown(e) {
@@ -76,7 +95,7 @@ class App{
             if (item){
                 this.curItem = item;
                 const index = this.items.indexOf(item);
-                this.items.puth(this.items.splice(index, 1)[0]);
+                this.items.push(this.items.splice(index, 1)[0]);
                 break;
             }
         }
