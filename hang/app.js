@@ -36,6 +36,7 @@ class App{
         
     }
 
+    //화면에 변화를 감지하는 함수
     resize(){
         this.stageWidth = document.body.clientWidth;
         this.stageHeight = document.body.clientHeight;
